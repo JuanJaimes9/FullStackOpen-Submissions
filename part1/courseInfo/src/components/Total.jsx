@@ -1,6 +1,5 @@
-function Total({ content }) {
-  const TotalExercises = content.reduce((sum, item) => sum + item.exercises, 0);
-
+function Total({ parts }) {
+  const TotalExercises = parts.reduce((sum, part) => sum + part.exercises, 0);
   return (
     <>
       <span>
