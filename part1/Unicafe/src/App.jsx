@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function ButtonFeedback({ onClick, text }) {
+function Button({ onClick, text }) {
   return (
     <div>
       <button onClick={onClick}>{text}</button>
@@ -8,24 +8,43 @@ function ButtonFeedback({ onClick, text }) {
   );
 }
 
-function Stadistics({ good, bad, neutral }) {
-  const all = good + neutral + bad;
-  const average = (good - bad) / all;
-  const positive = (good * 100) / all;
-
+function Stadistics({
+  good,
+  bad,
+  neutral,
+  total,
+  average,
+  positivePercentage,
+}) {
   return (
     <>
-      <div>
-        <p>good: {good}</p>
-        <p>meutral: {neutral}</p>
-        <p>bad: {bad}</p>
-        <p>all: {all}</p>
-        <p>average: {all ? average : "add some stadistics"}</p>
-        <p>positive:{all ? positive + "%" : "add some stadistics"}</p>
-      </div>
+      <tr>
+        <StadisticsLine text="Good" value={good} />
+      </tr>
+      <tr>
+        <StadisticsLine text="Neutral" value={neutral} />
+      </tr>
+      <tr>
+        <StadisticsLine text="Bad" value={bad} />
+      </tr>
+      <tr>
+        <StadisticsLine text="Total" value={total} />
+      </tr>
+      <tr>
+        <StadisticsLine text="Average" value={average} />
+      </tr>
+      <tr>
+        <StadisticsLine text="Positive" value={positivePercentage} />
+      </tr>
     </>
   );
 }
+
+const StadisticsLine = ({ text, value }) => (
+  <td>
+    {text}: {value}
+  </td>
+);
 
 function App() {
   const [good, setGood] = useState(0);
@@ -44,20 +63,33 @@ function App() {
     setBad(bad + 1);
   }
 
+  const total = good + bad + neutral;
+  const average = total ? (good - bad) / total : 0;
+  const positivePercentage = total ? (good / total) * 100 + "%" : 0;
+
   return (
     <>
       <h2>give feedback</h2>
-      <ButtonFeedback onClick={goodValue} text="good" />
-      <ButtonFeedback onClick={neutralValue} text="neutral" />
-      <ButtonFeedback onClick={badValue} text="bad" />
+      <Button onClick={goodValue} text="good" />
+      <Button onClick={neutralValue} text="neutral" />
+      <Button onClick={badValue} text="bad" />
 
       <h2>stadistics</h2>
-      {good || bad || neutral ? (
-        <div>
-          <Stadistics good={good} bad={bad} neutral={neutral} />
-        </div>
+      {total === 0 ? (
+        <h3>No feedback given</h3>
       ) : (
-        "No feedback given"
+        <table>
+          <tbody>
+            <Stadistics
+              good={good}
+              bad={bad}
+              neutral={neutral}
+              total={total}
+              average={average}
+              positivePercentage={positivePercentage}
+            />
+          </tbody>
+        </table>
       )}
     </>
   );
