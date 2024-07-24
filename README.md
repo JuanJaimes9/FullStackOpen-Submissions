@@ -40,3 +40,13 @@ npm install
 npm start
 
 ```
+
+## Contribuciones
+
+Las contribuciones son bienvenidas. Por favor sigue estos pasos:
+
+1. Haz un fork del proyecto
+2. Crea una nueva rama (git checkout -b feature/nueva-feature)
+3. Realiza tus cambios y haz un commit (git commit -m 'Añadir nueva feature')
+4. Haz push a la rama (git push origin feature/nueva-feature)
+5. Abre un Pull Request
