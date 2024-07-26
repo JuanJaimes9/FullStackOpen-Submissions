@@ -13,7 +13,6 @@ function Persons({ filteredNames, newName }) {
           alert(`${newName} is already added to phonebook`)
         )
       )}
-      );
     </div>
   );
 }
