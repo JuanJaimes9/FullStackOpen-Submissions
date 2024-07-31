@@ -1,4 +1,4 @@
-function Persons({ filteredNames, newName }) {
+function Persons({ filteredNames, newName, deletePerson }) {
   return (
     <div>
       <h2>Numbers</h2>
@@ -8,6 +8,7 @@ function Persons({ filteredNames, newName }) {
             <p>{`${person.name} - ${
               person.number ? `${person.number}` : `don't have number yet`
             }`}</p>
+            <button onClick={() => deletePerson(person.id)}>Delete</button>
           </div>
         ) : (
           alert(`${newName} is already added to phonebook`)
