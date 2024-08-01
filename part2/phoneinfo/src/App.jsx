@@ -6,8 +6,6 @@ import personsService from "./services/persons";
 
 const App = () => {
   const [persons, setPersons] = useState([]);
-  const [newName, setNewName] = useState("");
-  const [newNumber, setNewNumber] = useState("");
   const [searchName, setSearchName] = useState("");
 
   useEffect(() => {
@@ -20,33 +18,6 @@ const App = () => {
         console.error("Error getting data:", error);
       });
   }, []);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const existingPerson = persons.find((person) => person.name === newName);
-
-    if (existingPerson) {
-      alert(`${newName} is already added to phonebook`);
-      return;
-    }
-
-    const newPerson = {
-      name: newName,
-      number: newNumber,
-      id: `${
-        persons.length > 0 ? Math.max(...persons.map((p) => p.id)) + 1 : 1
-      }`,
-    };
-
-    personsService.create(newPerson).then((createdPerson) => {
-      setPersons(persons.concat(createdPerson));
-      setNewName("");
-      setNewNumber("");
-    });
-  };
-
-  const handleChangeName = (e) => setNewName(e.target.value);
-  const handleChangeNumber = (e) => setNewNumber(e.target.value);
 
   const filterName = (e) => setSearchName(e.target.value);
 
@@ -77,18 +48,8 @@ const App = () => {
     <div>
       <h1>Phonebook</h1>
       <Filter searchName={searchName} filterName={filterName} />
-      <PersonForm
-        newName={newName}
-        newNumber={newNumber}
-        handleChangeName={handleChangeName}
-        handleChangeNumber={handleChangeNumber}
-        handleSubmit={handleSubmit}
-      />
-      <Persons
-        filteredNames={filteredNames}
-        newName={newName}
-        deletePerson={deletePerson}
-      />
+      <PersonForm persons={persons} setPersons={setPersons} />
+      <Persons filteredNames={filteredNames} deletePerson={deletePerson} />
     </div>
   );
 };
