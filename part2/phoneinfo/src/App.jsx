@@ -3,10 +3,12 @@ import Filter from "./components/Filter";
 import PersonForm from "./components/PersonForm";
 import Persons from "./components/Persons";
 import personsService from "./services/persons";
+import "./styles/app.css";
 
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [searchName, setSearchName] = useState("");
+  const [advice, setAdvice] = useState(null);
 
   useEffect(() => {
     personsService
@@ -48,7 +50,12 @@ const App = () => {
     <div>
       <h1>Phonebook</h1>
       <Filter searchName={searchName} filterName={filterName} />
-      <PersonForm persons={persons} setPersons={setPersons} />
+      <PersonForm
+        persons={persons}
+        setPersons={setPersons}
+        setAdvice={setAdvice}
+        advice={advice}
+      />
       <Persons filteredNames={filteredNames} deletePerson={deletePerson} />
     </div>
   );

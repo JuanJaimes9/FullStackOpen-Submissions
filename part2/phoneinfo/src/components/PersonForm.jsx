@@ -1,16 +1,52 @@
 import { useState } from "react";
+import Advice from "./Advice";
 import personsService from "../services/persons";
 
-function PersonForm({ persons, setPersons }) {
+function PersonForm({ persons, setPersons, setAdvice, advice }) {
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const existingPerson = persons.find((person) => person.name === newName);
+    const person = persons.find((person) => person.name === newName);
 
-    if (existingPerson) {
-      alert(`${newName} is already added to phonebook`);
+    if (person) {
+      if (
+        window.confirm(
+          `${newName} is already added to phonebook, replace the old number with a new one?`
+        )
+      ) {
+        const numberChanged = {
+          ...person,
+          number: newNumber,
+        };
+
+        personsService
+          .update(person.id, numberChanged)
+          .then((updatedPerson) => {
+            setPersons(
+              persons.map((p) =>
+                p.id === updatedPerson.id ? updatedPerson : p
+              )
+            );
+            setNewName("");
+            setNewNumber("");
+            setAdvice("Number updated!");
+
+            setTimeout(() => {
+              setAdvice(null);
+            }, 10000);
+          })
+          .catch(() => {
+            setAdvice("error");
+
+            setTimeout(() => {
+              setAdvice(null);
+            }, 10000);
+          });
+      } else {
+        alert("number do not changed");
+      }
       return;
     }
 
@@ -27,6 +63,12 @@ function PersonForm({ persons, setPersons }) {
       setNewName("");
       setNewNumber("");
     });
+
+    setAdvice("New name added!");
+
+    setTimeout(() => {
+      setAdvice(null);
+    }, 10000);
   };
 
   const handleChangeName = (e) => setNewName(e.target.value);
@@ -43,6 +85,7 @@ function PersonForm({ persons, setPersons }) {
       <div>
         <button type="submit">add</button>
       </div>
+      <Advice advice={advice} />
     </form>
   );
 }
