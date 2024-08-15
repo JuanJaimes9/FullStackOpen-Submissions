@@ -14,10 +14,16 @@ const App = () => {
     personsService
       .getAll()
       .then((initialPeople) => {
-        setPersons(initialPeople);
+        if (Array.isArray(initialPeople)) {
+          setPersons(initialPeople);
+        } else {
+          console.error("Expected an array but got", initialPeople);
+          setPersons([]); // Set as empty array to avoid errors
+        }
       })
       .catch((error) => {
         console.error("Error getting data:", error);
+        setPersons([]); // Set as empty array to avoid errors
       });
   }, []);
 

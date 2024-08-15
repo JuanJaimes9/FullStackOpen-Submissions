@@ -1,6 +1,9 @@
 const express = require("express");
 const morgan = require("morgan");
 const app = express();
+const cors = require("cors");
+
+app.use(cors());
 app.use(express.json());
 
 morgan.token("body", (req) => {
@@ -39,7 +42,7 @@ app.get("/", (request, response) => {
 });
 
 app.get("/api/persons", (request, response) => {
-  response.json(persons);
+  response.json(persons || []); // Return an empty array if persons is undefined
 });
 
 app.get("/api/persons/:id", (request, response) => {
@@ -101,7 +104,7 @@ app.get("/info", (request, response) => {
   );
 });
 
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
