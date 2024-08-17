@@ -13,8 +13,6 @@ const App = () => {
   useEffect(() => {
     personsService
       .getAll()
-      .then((initialPeople) => setPersons(initialPeople))
-      .catch((error) => console.error("Error getting data:", error));
       .then((initialPeople) => {
         setPersons(initialPeople);
       })
