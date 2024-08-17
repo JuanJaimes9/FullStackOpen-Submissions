@@ -15,6 +15,12 @@ const App = () => {
       .getAll()
       .then((initialPeople) => setPersons(initialPeople))
       .catch((error) => console.error("Error getting data:", error));
+      .then((initialPeople) => {
+        setPersons(initialPeople);
+      })
+      .catch((error) => {
+        console.error("Error getting data:", error);
+      });
   }, []);
 
   const filterName = (e) => setSearchName(e.target.value);
