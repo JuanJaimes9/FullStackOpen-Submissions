@@ -1,3 +1,6 @@
+GET http://localhost:3001/api/persons
+
+###
 POST http://localhost:3001/api/persons
 Content-Type: application/json
 
@@ -5,4 +8,3 @@ Content-Type: application/json
     "name": "Juan Jaimes",
     "number": "318-284-3103"
 }
-

@@ -2,6 +2,7 @@ const express = require("express");
 const morgan = require("morgan");
 const app = express();
 app.use(express.json());
+app.use(morgan("tiny"));
 
 morgan.token("body", (req) => {
   return JSON.stringify(req.body);
@@ -53,11 +54,13 @@ app.get("/api/persons/:id", (request, response) => {
   }
 });
 
+// Generar ID de la persona
 const generateId = () => {
   const randomId = Math.floor(Math.random() * 100);
   return randomId;
 };
 
+// Postear la persona
 app.post("/api/persons", (request, response) => {
   const body = request.body;
 
@@ -86,6 +89,7 @@ app.post("/api/persons", (request, response) => {
   response.json(person);
 });
 
+// Eliminar la persona
 app.delete("/api/persons/:id", (request, response) => {
   const id = Number(request.params.id);
   persons = persons.filter((person) => person.id !== id);
@@ -93,12 +97,14 @@ app.delete("/api/persons/:id", (request, response) => {
   response.status(204).end();
 });
 
-app.get("/info", (request, response) => {
+// agregar /info
+app.get("/info", (req, resp) => {
   const length = persons.length;
-  const currentDateTime = new Date().toUTCString();
-  response.send(
-    `Phonebook has info for ${length} people <br> ${currentDateTime}`
-  );
+  const date = new Date();
+  console.log(date);
+  resp.send(`<h2>Phonebook has info for ${length} people</h2>
+    <br/>
+    <p>${date}</p>`);
 });
 
 const PORT = 3001;
