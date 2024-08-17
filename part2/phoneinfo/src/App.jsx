@@ -13,12 +13,8 @@ const App = () => {
   useEffect(() => {
     personsService
       .getAll()
-      .then((initialPeople) => {
-        setPersons(initialPeople);
-      })
-      .catch((error) => {
-        console.error("Error getting data:", error);
-      });
+      .then((initialPeople) => setPersons(initialPeople))
+      .catch((error) => console.error("Error getting data:", error));
   }, []);
 
   const filterName = (e) => setSearchName(e.target.value);
@@ -34,12 +30,8 @@ const App = () => {
       if (window.confirm(`Delete ${personToDelete.name}?`)) {
         personsService
           .deletePerson(id)
-          .then(() => {
-            setPersons(persons.filter((p) => p.id !== id));
-          })
-          .catch((error) => {
-            console.error("Error deleting person:", error);
-          });
+          .then(() => setPersons(persons.filter((p) => p.id !== id)))
+          .catch((error) => console.error("Error deleting person:", error));
       }
     } else {
       console.error("Person not found");
