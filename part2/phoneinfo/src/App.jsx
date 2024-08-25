@@ -9,12 +9,17 @@ const App = () => {
   const [persons, setPersons] = useState([]);
   const [searchName, setSearchName] = useState("");
   const [advice, setAdvice] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     personsService
       .getAll()
-      .then((initialPeople) => setPersons(initialPeople))
-      .catch((error) => console.error("Error getting data:", error));
+      .then((initialPeople) => {
+        setPersons(initialPeople);
+      })
+      .catch((error) => {
+        console.error("Error getting data:", error);
+      });
   }, []);
 
   const filterName = (e) => setSearchName(e.target.value);
@@ -45,8 +50,10 @@ const App = () => {
       <PersonForm
         persons={persons}
         setPersons={setPersons}
-        setAdvice={setAdvice}
         advice={advice}
+        setAdvice={setAdvice}
+        setError={setError}
+        error={error}
       />
       <Persons filteredNames={filteredNames} deletePerson={deletePerson} />
     </div>

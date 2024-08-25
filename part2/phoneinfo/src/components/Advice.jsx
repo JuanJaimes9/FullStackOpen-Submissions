@@ -1,13 +1,11 @@
-function Advice({ advice }) {
-  if (advice === null) {
+function Advice({ advice, error }) {
+  if (advice === null && error === null) {
     return null;
   }
 
-  const className = `advice ${advice === "error" ? "error" : ""}`;
-
   return (
-    <div className={className}>
-      {advice === "error" ? "An error occurred" : advice}
+    <div className={advice ? "advice" : "error"}>
+      {advice ? advice : `An error occurred: ${error}`}
     </div>
   );
 }
