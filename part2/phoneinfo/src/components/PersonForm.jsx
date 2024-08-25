@@ -102,7 +102,7 @@ function PersonForm({
         <h2>add a new</h2>
         name: <input value={newName} onChange={handleChangeName} />
         number:
-        <input type="number" value={newNumber} onChange={handleChangeNumber} />
+        <input value={newNumber} onChange={handleChangeNumber} />
       </div>
       <div>
         <button type="submit">add</button>
