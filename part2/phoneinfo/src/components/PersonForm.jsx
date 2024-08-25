@@ -2,7 +2,14 @@ import { useState } from "react";
 import Advice from "./Advice";
 import personsService from "../services/persons";
 
-function PersonForm({ persons, setPersons, setAdvice, advice }) {
+function PersonForm({
+  persons,
+  setPersons,
+  advice,
+  setAdvice,
+  setError,
+  error,
+}) {
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
 
@@ -32,16 +39,19 @@ function PersonForm({ persons, setPersons, setAdvice, advice }) {
             setNewName("");
             setNewNumber("");
             setAdvice("Number updated!");
+            setError(null);
 
             setTimeout(() => {
               setAdvice(null);
+              setError(null);
             }, 10000);
           })
-          .catch(() => {
-            setAdvice("error");
+          .catch((error) => {
+            setError(error.response?.data?.error || "An error occurred");
 
             setTimeout(() => {
               setAdvice(null);
+              setError(null);
             }, 10000);
           });
       } else {
@@ -58,17 +68,29 @@ function PersonForm({ persons, setPersons, setAdvice, advice }) {
       }`,
     };
 
-    personsService.create(newPerson).then((createdPerson) => {
-      setPersons(persons.concat(createdPerson));
-      setNewName("");
-      setNewNumber("");
-    });
+    personsService
+      .create(newPerson)
+      .then((createdPerson) => {
+        setPersons(persons.concat(createdPerson));
+        setNewName("");
+        setNewNumber("");
+        setAdvice("New name added!");
+        setError(null);
 
-    setAdvice("New name added!");
+        setTimeout(() => {
+          setAdvice(null);
+          setError(null);
+        }, 10000);
+      })
+      .catch((error) => {
+        console.log(error.response?.data?.error || "An error occurred");
+        setError(error.response?.data?.error || "An error occurred");
 
-    setTimeout(() => {
-      setAdvice(null);
-    }, 10000);
+        setTimeout(() => {
+          setAdvice(null);
+          setError(null);
+        }, 10000);
+      });
   };
 
   const handleChangeName = (e) => setNewName(e.target.value);
@@ -85,7 +107,7 @@ function PersonForm({ persons, setPersons, setAdvice, advice }) {
       <div>
         <button type="submit">add</button>
       </div>
-      <Advice advice={advice} />
+      <Advice advice={advice} error={error} />
     </form>
   );
 }

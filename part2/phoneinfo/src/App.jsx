@@ -9,6 +9,7 @@ const App = () => {
   const [persons, setPersons] = useState([]);
   const [searchName, setSearchName] = useState("");
   const [advice, setAdvice] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     personsService
@@ -49,8 +50,10 @@ const App = () => {
       <PersonForm
         persons={persons}
         setPersons={setPersons}
-        setAdvice={setAdvice}
         advice={advice}
+        setAdvice={setAdvice}
+        setError={setError}
+        error={error}
       />
       <Persons filteredNames={filteredNames} deletePerson={deletePerson} />
     </div>
