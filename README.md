@@ -14,7 +14,10 @@ El repositorio está organizado por partes del curso, con cada carpeta correspon
   - `Anecdotes`: Aplicación para obtener una anecdota random y votar
 - **part2**: Comunicando con el servidor
   - `CourseInfo`: Aplicación en la que se organiza la información de un curso usando la desestructuración.
+  - `Countries`: App en la que se muestra la información de diferentes paises.
+  - `PhoneBook`: Aplicación en la que se obtienen de una DB, varios números de teléfono, se agregan, elimiman, actualizan y se observan en la app.
 - **part3**: Node.js y Express
+  - `backend`: Es la parte lógica del PhoneBook, usando MongoDB y Express.
 - **part4**: Testing
 - **part5**: Usuarios y autenticación
 - **part6**: State management con Redux
