@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseUrl = "http://localhost:3001/api/persons"; // Proxy redirige a http://localhost:3001/api/persons
+const baseUrl = "api/persons"; // Proxy redirige a http://localhost:3001/api/persons
 
 const getAll = () => {
   const request = axios.get(baseUrl);
