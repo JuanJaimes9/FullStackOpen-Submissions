@@ -1,0 +1,11 @@
+GET http://localhost:3000/blogs
+
+###
+POST http://localhost:3000/blogs
+Content-Type: application/json
+
+{
+    "title": "exampleTitle2",
+    "author": "exampleAuthor2",
+    "url": "exampleUrl2"
+}

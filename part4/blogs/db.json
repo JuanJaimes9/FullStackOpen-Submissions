@@ -1,0 +1,39 @@
+{
+  "blogs": [
+    {
+      "id": 1,
+      "author": "Juan Pérez",
+      "title": "Aprendiendo React",
+      "url": "https://example.com/aprendiendo-react",
+      "votes": 0
+    },
+    {
+      "id": 2,
+      "author": "María Gómez",
+      "title": "Guía de JavaScript",
+      "url": "https://example.com/guia-javascript",
+      "votes": 0
+    },
+    {
+      "id": 3,
+      "author": "Carlos Ruiz",
+      "title": "Introducción a Node.js",
+      "url": "https://example.com/introduccion-nodejs",
+      "votes": 0
+    },
+    {
+      "id": 4,
+      "author": "Ana Martínez",
+      "title": "CSS para principiantes",
+      "url": "https://example.com/css-principiantes",
+      "votes": 0
+    },
+    {
+      "id": 5,
+      "author": "Luis Fernández",
+      "title": "Desarrollo Frontend con Vue",
+      "url": "https://example.com/frontend-vue",
+      "votes": 0
+    }
+  ]
+}
