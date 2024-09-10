@@ -1,0 +1,10 @@
+POST http://localhost:3009/api/blogs 
+Content-Type: application/json
+
+{
+    "id": "123",
+    "title": "Batman",
+    "author": "Juan Jaimes",
+    "url": "www.juanjaimes.com",
+    "likes": 0
+}
